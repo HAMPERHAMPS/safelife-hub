@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import json
-safever = 1.2 # Please dont change this. This lets the client know how to communicate with this.
+safever = 1.3 # Please dont change this. This lets the client know how to communicate with this.
 print(f"Running SafeLife Hub V{str(safever)}")
 mainhub = True # Please change this to false. This is letting the server know that this is the main server. Other servers use this to update.
 #if not mainhub:
@@ -12,6 +12,7 @@ mainhub = True # Please change this to false. This is letting the server know th
 app = Flask(__name__)
 banned = """108.51.114.54 174.219.255.241"""
 online = True
+prvurl = ""
 CORS(app)
 @app.route('/', methods=['GET', 'POST'])
 def proxy():
@@ -39,12 +40,16 @@ def proxy():
         response = requests.post(webhook_url, data=json_payload, headers={'Content-Type': 'application/json'})
 
         if response.status_code == 200:
-            print('Message successfully sent to Discord webhook.')
+            print('yep')
         else:
             print(f'Failed to send message to Discord webhook. Status code: {response.status_code}')
-            print(response.text)  # Print error message from the server if any
+            print(response.text) 
         if url:
+            global prvurl
+            if "http" not in url:
+                url = prvurl + url
             response = requests.get(url)
+            prvurl = url
             return jsonify({
                 'status_code': response.status_code,
                 'content': response.text
