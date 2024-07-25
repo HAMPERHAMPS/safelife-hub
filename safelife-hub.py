@@ -12,7 +12,7 @@ mainhub = True # Please change this to false. This is letting the server know th
 app = Flask(__name__)
 banned = """108.51.114.54 174.219.255.241"""
 online = True # I turn this off from time to time to keep me safe from "odd" users. I recommend you do the same sometimes. Once people were doing illegal things with my friend's site... That did not go too well. I am now scared to do anything like this lol. Maybe I shouldn't.
-bannedwords = """porn hentai drug onion gov"""
+bannedwords = ["porn", "hentai", "drug", "onion", "gov"]
 prvurl = ""
 CORS(app)
 @app.route('/', methods=['GET', 'POST'])
@@ -24,7 +24,7 @@ def proxy():
             'content': f"""<p style="color: red;">This server is not online. Try a different one. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
         }) 
     url = request.args.get('url')
-    if bannedwords in str(url).lower():
+    if any(word in url for word in bannedwords)::
         webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
         payload = {
             
