@@ -5,6 +5,7 @@ import json
 safever = 2.0 # Please dont change this. This lets the client know how to communicate with this.
 print(f"Running SafeLife Hub V{str(safever)}")
 mainhub = True # Please change this to false. This is letting the server know that this is the main server. Other servers use this to update.
+# im putting this here to see why a datacenter in califonia is using safelife
 #if not mainhub:
 #    latestver = requests.get('https://safelifehub.hamperhamps.space/version')
 #    if str(latestver) != safever:
