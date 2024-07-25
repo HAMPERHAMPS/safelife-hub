@@ -24,7 +24,7 @@ def proxy():
             'content': f"""<p style="color: red;">This server is not online. Try a different one. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
         }) 
     url = request.args.get('url')
-    if str(URL).lower() in bannedwords:
+    if str(url).lower() in bannedwords:
         webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
         payload = {
             
