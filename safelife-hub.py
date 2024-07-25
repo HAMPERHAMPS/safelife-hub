@@ -18,9 +18,10 @@ prvurl = ""
 CORS(app)
 @app.route('/', methods=['GET', 'POST'])
 def proxy():
+    global online
     client_ip = request.remote_addr
     url = request.args.get('url')
-    global online
+    
     if url == "eshutoff9900": # When you use this I recommend removing this "if" because people can misuse it. I only use it to make it easy to shut off the server.
         
         online = False
@@ -96,6 +97,7 @@ def proxy():
 
 @app.route('/ping', methods=['GET'])
 def ping():
+    global online
     satsts = "ok"
     if online:
         return jsonify({'status': 'ok'})
