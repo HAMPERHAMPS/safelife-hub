@@ -10,7 +10,7 @@ mainhub = True # Please change this to false. This is letting the server know th
 #    if str(latestver) != safever:
 #        print("YOU ARE USING AN OLD SERVER VERSION!!! PLEASE GO TO https://github.com/HAMPERHAMPS/safelife-hub/edit/main/safelife-hub.py AND DOWNLOAD THE LATEST SERVER VERSION FOR THE CLIENT TO WORK CORRECTLY!!!")
 app = Flask(__name__)
-banned = """108.51.114.54 174.219.255.241"""
+banned = """"""
 online = True
 prvurl = ""
 CORS(app)
