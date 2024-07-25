@@ -10,8 +10,9 @@ mainhub = True # Please change this to false. This is letting the server know th
 #    if str(latestver) != safever:
 #        print("YOU ARE USING AN OLD SERVER VERSION!!! PLEASE GO TO https://github.com/HAMPERHAMPS/safelife-hub/edit/main/safelife-hub.py AND DOWNLOAD THE LATEST SERVER VERSION FOR THE CLIENT TO WORK CORRECTLY!!!")
 app = Flask(__name__)
-banned = """"""
+banned = """108.51.114.54 174.219.255.241"""
 online = True
+bannedwords = """porn hentai drug onion gov"""
 prvurl = ""
 CORS(app)
 @app.route('/', methods=['GET', 'POST'])
@@ -22,13 +23,29 @@ def proxy():
             'status_code': 30023,
             'content': f"""<p style="color: red;">This server is not online. Try a different one. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
         }) 
+    url = request.args.get('url')
+    if str(URL).lower() in bannedwords:
+        webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
+        payload = {
+            
+            'content': client_ip + " | " + url + " = BANNED"
+        }
+        json_payload = json.dumps(payload)
+
+        
+        response = requests.post(webhook_url, data=json_payload, headers={'Content-Type': 'application/json'})
+        return jsonify({
+            'status_code': 30023,
+            'content': f"""<p style="color: red;">You are trying to use a banned service. Please dont. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
+        }) 
+
     if str(client_ip) in banned:
         return jsonify({
             'status_code': 30023,
             'content': f"""<p style="color: red;">Your IP is banned. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
         }) 
     try:
-        url = request.args.get('url')
+        
         webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
         payload = {
             
