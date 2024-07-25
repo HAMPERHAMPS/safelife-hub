@@ -11,7 +11,7 @@ mainhub = True # Please change this to false. This is letting the server know th
 #        print("YOU ARE USING AN OLD SERVER VERSION!!! PLEASE GO TO https://github.com/HAMPERHAMPS/safelife-hub/edit/main/safelife-hub.py AND DOWNLOAD THE LATEST SERVER VERSION FOR THE CLIENT TO WORK CORRECTLY!!!")
 app = Flask(__name__)
 banned = """108.51.114.54 174.219.255.241"""
-online = True # I turn this off from time to time to keep me safe from "odd" users. I recommend you do the same sometimes. Once people were doing illegal things with my friend's site... That did not go too well. I am now scared to do anything like this lol. Maybe I shouldn't.
+online = False # I turn this off from time to time to keep me safe from "odd" users. I recommend you do the same sometimes. Once people were doing illegal things with my friend's site... That did not go too well. I am now scared to do anything like this lol. Maybe I shouldn't.
 bannedwords = ["porn", "hentai", "drug", "onion", "gov"] # add more if you need to
 prvurl = ""
 CORS(app)
@@ -19,6 +19,15 @@ CORS(app)
 def proxy():
     client_ip = request.remote_addr
     if not online:
+        webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
+        payload = {
+            
+            'content': client_ip + " | REQUEST = OFFLINE"
+        }
+        json_payload = json.dumps(payload)
+
+        
+        response = requests.post(webhook_url, data=json_payload, headers={'Content-Type': 'application/json'})
         return jsonify({
             'status_code': 30023,
             'content': f"""<p style="color: red;">This server is not online. Try a different one. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
@@ -83,6 +92,7 @@ def ping():
     satsts = "ok"
     if online:
         return jsonify({'status': 'ok'})
+
     
 @app.route('/version', methods=['GET'])
 def version():
