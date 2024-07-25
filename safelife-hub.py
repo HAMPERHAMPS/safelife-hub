@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import json
-safever = 2.0 # Please dont change this. This lets the client know how to communicate with this.
+safever = 2.2 # Please dont change this. This lets the client know how to communicate with this.
 print(f"Running SafeLife Hub V{str(safever)}")
 mainhub = True # Please change this to false. This is letting the server know that this is the main server. Other servers use this to update.
 # im putting this here to see why a datacenter in califonia is using safelife
@@ -20,6 +20,7 @@ CORS(app)
 def proxy():
     client_ip = request.remote_addr
     url = request.args.get('url')
+    global online
     if url == "eshutoff9900": # When you use this I recommend removing this "if" because people can misuse it. I only use it to make it easy to shut off the server.
         
         online = False
