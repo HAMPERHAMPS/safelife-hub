@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 import json
-safever = 1.3 # Please dont change this. This lets the client know how to communicate with this.
+safever = 2.0 # Please dont change this. This lets the client know how to communicate with this.
 print(f"Running SafeLife Hub V{str(safever)}")
 mainhub = True # Please change this to false. This is letting the server know that this is the main server. Other servers use this to update.
 #if not mainhub:
@@ -12,7 +12,7 @@ mainhub = True # Please change this to false. This is letting the server know th
 app = Flask(__name__)
 banned = """108.51.114.54 174.219.255.241"""
 online = True # I turn this off from time to time to keep me safe from "odd" users. I recommend you do the same sometimes. Once people were doing illegal things with my friend's site... That did not go too well. I am now scared to do anything like this lol. Maybe I shouldn't.
-bannedwords = ["porn", "hentai", "drug", "onion", "gov"]
+bannedwords = ["porn", "hentai", "drug", "onion", "gov"] # add more if you need to
 prvurl = ""
 CORS(app)
 @app.route('/', methods=['GET', 'POST'])
