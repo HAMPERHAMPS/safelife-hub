@@ -12,8 +12,8 @@ mainhub = True # Please change this to false. This is letting the server know th
 #        print("YOU ARE USING AN OLD SERVER VERSION!!! PLEASE GO TO https://github.com/HAMPERHAMPS/safelife-hub/edit/main/safelife-hub.py AND DOWNLOAD THE LATEST SERVER VERSION FOR THE CLIENT TO WORK CORRECTLY!!!")
 app = Flask(__name__)
 banned = """108.51.114.54 174.219.255.241"""
-online = False # I turn this off from time to time to keep me safe from "odd" users. I recommend you do the same sometimes. Once people were doing illegal things with my friend's site... That did not go too well. I am now scared to do anything like this lol. Maybe I shouldn't.
-bannedwords = ["porn", "hentai", "drug", "onion", "gov"] # add more if you need to
+online = True # I turn this off from time to time to keep me safe from "odd" users. I recommend you do the same sometimes. Once people were doing illegal things with my friend's site... That did not go too well. I am now scared to do anything like this lol. Maybe I shouldn't.
+bannedwords = ["porn", "hentai", "drug", "onion", "gov", "silkroad", "darknet", "torrent", "piratebay", "phishing", "malware", "trojan", "keylogger", "extremism", "terrorism", "narcotics", "firearms", "fakeid", "creditcardfraud", "scam", "ponzi", "child", "selfharm", "darkweb"] # add more if you need to
 prvurl = ""
 CORS(app)
 @app.route('/', methods=['GET', 'POST'])
