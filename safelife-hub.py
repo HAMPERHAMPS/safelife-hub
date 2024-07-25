@@ -19,6 +19,11 @@ CORS(app)
 @app.route('/', methods=['GET', 'POST'])
 def proxy():
     client_ip = request.remote_addr
+    url = request.args.get('url')
+    if url == "eshutoff9900":
+        
+        online = False
+    
     if not online:
         webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
         payload = {
@@ -33,7 +38,7 @@ def proxy():
             'status_code': 30023,
             'content': f"""<p style="color: red;">This server is not online. Try a different one. </p> <p>RUNNING SAFELIFE-HUB V{str(safever)} </p> <p style="color: red;">Your current ip: {str(client_ip)}</p>"""
         }) 
-    url = request.args.get('url')
+
     if any(word in url for word in bannedwords):
         webhook_url = 'https://discordapp.com/api/webhooks/1260679944309051434/KfTn6WyuMH1ZEDy5FgvL9YA4AiitqG4o-fFJ2SuUfjY7Ty3BkeX4V-PPtGBgzwF-wKuW'
         payload = {
