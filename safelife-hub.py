@@ -20,7 +20,7 @@ CORS(app)
 def proxy():
     client_ip = request.remote_addr
     url = request.args.get('url')
-    if url == "eshutoff9900":
+    if url == "eshutoff9900": # When you use this I recommend removing this "if" because people can misuse it. I only use it to make it easy to shut off the server.
         
         online = False
     
